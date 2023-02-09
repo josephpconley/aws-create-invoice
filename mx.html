@@ -1,0 +1,63 @@
+<html>
+<head>
+    <style>
+        .line > table, .line > table > th, .line > table > td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+    <div style="width: 100%; float: left;">
+        <div style="float: left; width: 50%">
+            <h2>SEND TO:</h2>
+            <table>
+                <tr><td><b>Darrell Thompson</b></td></tr>
+                <tr><td><b>Mainstream Integration</b></td></tr>
+                <tr><td>19 Raintree Drive</td></tr>
+                <tr><td>Sicklerville, NJ 08081</td></tr>
+            </table>
+        </div>
+        <div style="float: right; width: 50%">
+            <h2>INVOICE</h2>
+            <table>
+                <tr>
+                    <td><b>INVOICE NUMBER</b></td>
+                    <td>$invoice_number</td>
+                </tr>
+                <tr>
+                    <td><b>INVOICE DATE</b></td>
+                    <td>$invoice_date</td>
+                </tr>
+                <tr>
+                    <td><b>BILLING PERIOD</b></td>
+                    <td>$start-$end</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div style="width: 100%; padding-top: 250px;" class="line">
+        <table style="width: 100%; float: right;">
+            <thead>
+            <tr>
+                <th>QTY</th>
+                <th>DESCRIPTION</th>
+                <th>UNIT PRICE</th>
+                <th>AMOUNT</th>
+            </tr>
+            </thead>
+            <tbody style="text-align: center">
+                <tr>
+                    <td>1</td><td>EJT Maintenance</td><td>$$200.00</td><td>$$200.00</td>
+                </tr>
+                <tr>
+                    <td>1</td><td>HMS Maintenance</td><td>$$200.00</td><td>$$200.00</td>
+                </tr>
+                <tr>
+                    <td></td><td><b>TOTAL</b></td><td></td><td><b>$$400.00</b></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

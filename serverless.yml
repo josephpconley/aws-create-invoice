@@ -1,0 +1,49 @@
+org: jpc02
+app: workspace
+service: create-invoice
+frameworkVersion: '3'
+provider:
+  name: aws
+  runtime: python3.8
+  environment:
+    S3_BUCKET_NAME: ${file(./config.yml):BucketName}
+  iam:
+    role:
+      name: "create-invoice-role"
+      statements:
+      - Effect: "Allow"
+        Action: "s3:*"
+        Resource:
+          - arn:aws:s3:::${file(./config.yml):BucketName}
+          - arn:aws:s3:::${file(./config.yml):BucketName}/*
+      - Effect: "Allow"
+        Action:
+          - ses:SendEmail
+          - ses:SendRawEmail
+        Resource: "*"
+
+
+package:
+  patterns:
+    - "!node_modules/**"
+    - "!venv/**"
+
+resources:
+  Resources:
+    NewResource:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${file(./config.yml):BucketName}
+
+functions:
+  invoice:
+    handler: invoice.handler
+    layers:
+      - arn:aws:lambda:us-east-1:347599033421:layer:wkhtmltopdf-0_12_5:1
+
+plugins:
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    dockerizePip: true
