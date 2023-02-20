@@ -21,3 +21,5 @@ var/
 
 .idea
 node_modules
+event_mx.json
+__pycache__

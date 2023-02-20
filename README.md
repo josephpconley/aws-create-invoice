@@ -1,12 +1,14 @@
-# Serverless Framework AWS Python Example - Generating a PDF Invoice
+# Create a PDF Invoice using Serverless
 
-Using Serverless to create a Lambda that generates a PDF, stores to S3 and sends via SES
-
-Uses a Lambda Layer to handle the wkhtmltopdf complexity
+Using Serverless to create a Lambda that generates a PDF, stores to S3 and sends via SES.  Uses a Lambda Layer with wkhtmltopdf for PDF generation
 
 Links
 - https://www.serverless.com/blog/handling-aws-lambda-python-dependencies
 - https://blog.richardkeller.net/building-a-pdf-generator-on-aws-lambda-with-python3-and-wkhtmltopdf/
+
+## Overview
+
+![serverless](/create_invoice.svg)
 
 ## Usage
 
@@ -35,11 +37,19 @@ Running the above will automatically add `serverless-python-requirements` to `pl
 ### Takeaways
 
 - If config looks correct but still having deploy issues, manually delete CF stack and run `sls deploy` again
+- Wasted a lot of time trying to package wkhtmltopdf with this, using a shared Lambda Layer was really nice!
 - seems like can't get far evolving the stack without having to do nuclear deletes - likely more of a CloudFormation issue but still probably best to manage all related entities separately or more reliably (Terraform?)
 - Serverless will generate wrapper `s_<function>` files and use these to set the handler
 - filename containing the core lambda code has to be a certain length??? (see https://forum.serverless.com/t/serverless-sdk-get-user-handler-module-has-no-attribute/9659)
 
 ## TODO
-- EventBridge? to trigger monthly invoice events
+- EventBridge to trigger monthly invoice events
 - Make more dynamic based on client and line items
 - Write it up
+
+### DDB queries
+
+Simple update
+```
+aws dynamodb update-item --table-name invoices --key "S":"MX" 
+```

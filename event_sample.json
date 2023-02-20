@@ -1,0 +1,22 @@
+{
+  "to": "<name>",
+  "toEmail": "<to_email>",
+  "company": "<company name>",
+  "key": "<primary key for customer>",
+  "address1": "",
+  "address2": "",
+  "lineItems": [
+    {
+      "qty": 1,
+      "description": "<line_item_descrption>",
+      "unitPrice": 200,
+      "amount": 200
+    },
+    {
+      "qty": 1,
+      "description": "<line_item_descrption>",
+      "unitPrice": 200,
+      "amount": 200
+    }
+  ]
+}

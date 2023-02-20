@@ -12,10 +12,10 @@
         <div style="float: left; width: 50%">
             <h2>SEND TO:</h2>
             <table>
-                <tr><td><b>Darrell Thompson</b></td></tr>
-                <tr><td><b>Mainstream Integration</b></td></tr>
-                <tr><td>19 Raintree Drive</td></tr>
-                <tr><td>Sicklerville, NJ 08081</td></tr>
+                <tr><td><b>$to</b></td></tr>
+                <tr><td><b>$company</b></td></tr>
+                <tr><td>$address1</td></tr>
+                <tr><td>$address2</td></tr>
             </table>
         </div>
         <div style="float: right; width: 50%">
@@ -46,17 +46,7 @@
                 <th>AMOUNT</th>
             </tr>
             </thead>
-            <tbody style="text-align: center">
-                <tr>
-                    <td>1</td><td>EJT Maintenance</td><td>$$200.00</td><td>$$200.00</td>
-                </tr>
-                <tr>
-                    <td>1</td><td>HMS Maintenance</td><td>$$200.00</td><td>$$200.00</td>
-                </tr>
-                <tr>
-                    <td></td><td><b>TOTAL</b></td><td></td><td><b>$$400.00</b></td>
-                </tr>
-            </tbody>
+            <tbody style="text-align: center">$lineItemsHtml</tbody>
         </table>
     </div>
 </body>

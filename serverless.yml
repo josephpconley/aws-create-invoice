@@ -20,6 +20,8 @@ provider:
         Action:
           - ses:SendEmail
           - ses:SendRawEmail
+          - dynamodb:UpdateItem
+          - dynamodb:GetItem
         Resource: "*"
 
 
