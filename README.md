@@ -42,11 +42,6 @@ Running the above will automatically add `serverless-python-requirements` to `pl
 - Serverless will generate wrapper `s_<function>` files and use these to set the handler
 - filename containing the core lambda code has to be a certain length??? (see https://forum.serverless.com/t/serverless-sdk-get-user-handler-module-has-no-attribute/9659)
 
-## TODO
-- EventBridge to trigger monthly invoice events
-- Make more dynamic based on client and line items
-- Write it up
-
 ### DDB queries
 
 Simple update
