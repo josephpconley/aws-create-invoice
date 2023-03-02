@@ -1,6 +1,7 @@
 {
   "to": "<name>",
-  "toEmail": "<to_email>",
+  "toEmails": ["<to_email>"],
+  "ccEmails": ["<cc_email>"],
   "company": "<company name>",
   "key": "<primary key for customer>",
   "address1": "",

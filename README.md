@@ -19,9 +19,10 @@ Use `export AWS_PROFILE=XXX` to set the profile before you run the following `sl
 ### Commands
 
 ```
+export AWS_PROFILE=joec
 sls deploy
-sls invoke -f hello
-sls invoke local --function hello
+sls invoke -f invoice -p event_sample.json
+sls invoke local -f invoice -p event_sample.json
 ```
 
 ### Bundling dependencies

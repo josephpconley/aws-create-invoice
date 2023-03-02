@@ -44,7 +44,8 @@ def handler(event, context):
     )
 
     # Send Email and return response
-    return send_email(recipient=event["toEmail"], subject=invoice_number, html=input, text="New Invoice", tmp_file=filepath)
+    return send_email(to_emails=event["toEmails"], cc_emails=event["ccEmails"], subject=invoice_number, html=input,
+                      text="New Invoice", tmp_file=filepath)
 
 def get_html_params(invoice_number):
     today = date.today()
@@ -97,13 +98,14 @@ def get_invoice_count(key):
     )
     return int(res.get("Attributes").get("invoice_count").get("N"))
 
-def send_email(recipient, subject, html, text, tmp_file):
+def send_email(to_emails, cc_emails, subject, html, text, tmp_file):
     response = {}
     try:
         msg = MIMEMultipart('mixed')
         msg['Subject'] = subject
         msg['From'] = SENDER
-        msg['To'] = recipient
+        msg['To'] = ', '.join(to_emails)
+        msg['Cc'] = ', '.join(cc_emails)
 
         # Create a multipart/alternative child container.
         msg_body = MIMEMultipart('alternative')
@@ -121,7 +123,7 @@ def send_email(recipient, subject, html, text, tmp_file):
 
         response = ses.send_raw_email(
             Source=SENDER,
-            Destinations=[recipient],
+            Destinations=to_emails + cc_emails,
             RawMessage={
                 'Data': msg.as_string(),
             },
