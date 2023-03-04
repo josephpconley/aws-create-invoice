@@ -1,4 +1,4 @@
-# Create a PDF Invoice using Serverless
+# Create and Send a PDF Invoice using AWS/Serverless
 
 Using Serverless to create a Lambda that generates a PDF, stores to S3 and sends via SES.  Uses a Lambda Layer with wkhtmltopdf for PDF generation
 
