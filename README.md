@@ -49,3 +49,6 @@ Simple update
 ```
 aws dynamodb update-item --table-name invoices --key "S":"MX" 
 ```
+
+### TODO
+- fix the bolding for TOTALS in both inline email and PDF attachment
