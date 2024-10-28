@@ -1,7 +1,6 @@
 org: jpc02
 app: workspace
 service: create-invoice
-frameworkVersion: '3'
 provider:
   name: aws
   runtime: python3.8
@@ -23,7 +22,6 @@ provider:
           - dynamodb:UpdateItem
           - dynamodb:GetItem
         Resource: "*"
-
 
 package:
   patterns:

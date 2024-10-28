@@ -9,13 +9,13 @@
   "lineItems": [
     {
       "qty": 1,
-      "description": "<line_item_descrption>",
+      "description": "<line_item_description>",
       "unitPrice": 200,
       "amount": 200
     },
     {
       "qty": 1,
-      "description": "<line_item_descrption>",
+      "description": "<line_item_description>",
       "unitPrice": 200,
       "amount": 200
     }

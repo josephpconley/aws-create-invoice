@@ -20,6 +20,7 @@ S3_BUCKET_NAME = os.environ.get('S3_BUCKET_NAME')
 SENDER = "me@jpc2.org" # must be verified in AWS SES Email
 CHARSET = "UTF-8"
 
+# update this path if running locally
 pdf_config = pdfkit.configuration(wkhtmltopdf="/opt/bin/wkhtmltopdf")
 
 def handler(event, context):
@@ -44,9 +45,10 @@ def handler(event, context):
     )
 
     # Send Email and return response
-    return send_email(to_emails=event["toEmails"], cc_emails=event["ccEmails"], subject=invoice_number, html=input,
+    return send_email(to_emails=event["toEmails"], cc_emails=event.get("ccEmails"), subject=invoice_number, html=input,
                       text="New Invoice", tmp_file=filepath)
 
+# TODO allow this to be overridden by the event parameters for custom invoicing
 def get_html_params(invoice_number):
     today = date.today()
     lastMonth = today.replace(day=1) - datetime.timedelta(days=1)
@@ -69,15 +71,15 @@ def generate_invoice_html(event, invoice_number):
     #add grand totals
     total = {
         "qty": "",
-        "description": "TOTAL",
-        "unitPrice": sum(x.get("unitPrice") for x in event.get("lineItems")),
-        "amount": sum(x.get("amount") for x in event.get("lineItems")),
+        "description": "<b>TOTAL</b>",
+        "unitPrice": "",
+        "amount": "<b>$" + str(sum(int(x.get("amount").replace("$", "")) for x in event.get("lineItems"))) + "</b>"
     }
     line_item_html += Template(tmpl).substitute(total)
     event["lineItemsHtml"] = line_item_html
 
     #do the full html transformation
-    file = open('invoice.html', 'r')
+    file = open('invoice_a360.html', 'r')
     return Template(file.read()).substitute(event)
 
 def get_invoice_count(key):
@@ -100,12 +102,15 @@ def get_invoice_count(key):
 
 def send_email(to_emails, cc_emails, subject, html, text, tmp_file):
     response = {}
+    destinations = to_emails
     try:
         msg = MIMEMultipart('mixed')
         msg['Subject'] = subject
         msg['From'] = SENDER
         msg['To'] = ', '.join(to_emails)
-        msg['Cc'] = ', '.join(cc_emails)
+        if cc_emails:
+            msg['Cc'] = ', '.join(cc_emails)
+            destinations = destinations + cc_emails
 
         # Create a multipart/alternative child container.
         msg_body = MIMEMultipart('alternative')
@@ -123,7 +128,7 @@ def send_email(to_emails, cc_emails, subject, html, text, tmp_file):
 
         response = ses.send_raw_email(
             Source=SENDER,
-            Destinations=to_emails + cc_emails,
+            Destinations=destinations,
             RawMessage={
                 'Data': msg.as_string(),
             },
@@ -139,3 +144,7 @@ def send_email(to_emails, cc_emails, subject, html, text, tmp_file):
     response["statusCode"] = 200
     response["body"] = "body"
     return response
+
+#custom event
+# event = { "to": "Darrell Thompson", "toEmails": ["dthompson@mainstreamintegration.com"], "ccEmails": ["joe.conley@mainstreamintegration.com"], "company": "Maisntream Integration", "key": "MX", "address1": "19 Raintree Drive", "address2": "Sicklerville, NJ 08081", "lineItems": [ { "qty": 1, "description": "EJT Maintenance", "unitPrice": 200, "amount": 200 }, { "qty": 1, "description": "HMS Maintenance", "unitPrice": 200, "amount": 200 }, { "qty": 25, "description": "HMS Updates_120623", "unitPrice": 70, "amount": 1750 } ] }
+# handler(event, None)

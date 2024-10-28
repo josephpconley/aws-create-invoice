@@ -1,0 +1,23 @@
+{
+  "to": "Chris Cabell",
+  "toEmails": ["ccabell76@gmail.com"],
+  "ccEmails": ["josephpconley@gmail.com"],
+  "company": "Aesthetics360",
+  "key": "AES",
+  "address1": "",
+  "address2": "",
+  "lineItems": [
+    {
+      "qty": 14,
+      "description": "Hours Worked - Week of 9/16",
+      "unitPrice": "$150",
+      "amount": "$2100"
+    },
+    {
+      "qty": 17.5,
+      "description": "Hours Worked - Week of 9/23",
+      "unitPrice": "$150",
+      "amount": "$2625"
+    }
+  ]
+}

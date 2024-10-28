@@ -1,0 +1,68 @@
+<html>
+<head>
+    <style>
+        .line > table, .line > table > th, .line > table > td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+    <div style="width: 100%; float: left;">
+        <div style="float: left; width: 50%">
+            <h2>SEND TO:</h2>
+            <table>
+                <tr><td><b>$to</b></td></tr>
+                <tr><td><b>$company</b></td></tr>
+                <tr><td>$address1</td></tr>
+                <tr><td>$address2</td></tr>
+            </table>
+        </div>
+        <div style="float: right; width: 50%">
+            <h2>INVOICE</h2>
+            <table>
+                <tr>
+                    <td><b>INVOICE NUMBER</b></td>
+                    <td>$invoice_number</td>
+                </tr>
+                <tr>
+                    <td><b>INVOICE DATE</b></td>
+                    <td>$invoice_date</td>
+                </tr>
+                <tr>
+                    <td><b>BILLING PERIOD</b></td>
+                    <td>$start-$end</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div style="width: 100%; padding-top: 250px;" class="line">
+        <table style="width: 100%; float: right;">
+            <thead>
+            <tr>
+                <th>HOURS</th>
+                <th>DESCRIPTION</th>
+                <th>UNIT PRICE</th>
+                <th>AMOUNT</th>
+            </tr>
+            </thead>
+            <tbody style="text-align: center">$lineItemsHtml</tbody>
+        </table>
+    </div>
+    <div style="width: 100%; float: left;">
+        <div style="float: left; width: 100%">
+            <h3>PAYMENT TERMS</h3>
+            <table>
+                <tr>
+                    <td><b>Zelle ID:</b></td>
+                    <td>josephpconley@gmail.com</td>
+                </tr>
+                <tr>
+                    <td>DUE ON RECEIPT</td>
+                    <td>Full Description of Hours: https://docs.google.com/spreadsheets/d/1GoQ53MOdpG1HvfHUt3LehnulKhK5pkF0dY6VdN1SLyI/edit?gid=1809635019#gid=1809635019</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
