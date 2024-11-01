@@ -50,6 +50,16 @@ Simple update
 aws dynamodb update-item --table-name invoices --key "S":"MX" 
 ```
 
+All active clients have a simple counter in this DDB table to track invoice index:
+https://us-east-1.console.aws.amazon.com/dynamodbv2/home?region=us-east-1#item-explorer?maximize=true&operation=SCAN&table=invoices
+
+### A360
+Running these locally now given the more custom nature of these
+
+```
+sls invoke local -f invoice -p aes-000002.json
+```
+
 ### TODO
 - fix the bolding for TOTALS in both inline email and PDF attachment
 - integrate with invoicing solution like Quickbooks
