@@ -55,9 +55,10 @@ https://us-east-1.console.aws.amazon.com/dynamodbv2/home?region=us-east-1#item-e
 
 ### A360
 Running these locally now given the more custom nature of these
+Copy the prior month's event to the `archived` folder, increment and update based on worksheet hours
 
 ```
-sls invoke local -f invoice -p aes-000002.json
+sls invoke local -f invoice -p clients/AES/aes-000004.json
 ```
 
 ### TODO

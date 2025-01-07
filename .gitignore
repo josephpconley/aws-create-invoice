@@ -24,3 +24,4 @@ node_modules
 event_mx.json
 __pycache__
 aes-*.json
+clients

@@ -31,7 +31,7 @@ def handler(event, context):
     padded = "{:06d}".format(invoice_count)
     invoice_number = f'{client_key}-{padded}'
 
-    input = generate_invoice_html(event, invoice_number)
+    input = generate_invoice_html(event, client_key, invoice_number)
     filepath = f'/tmp/{invoice_number}.pdf'
     pdfkit.from_string(input, filepath, configuration=pdf_config, options={})
 
@@ -57,7 +57,7 @@ def get_html_params(invoice_number):
 
     return {"invoice_number": invoice_number, "invoice_date": today.strftime(FMT), "start": start, "end": end}
 
-def generate_invoice_html(event, invoice_number):
+def generate_invoice_html(event, client_key, invoice_number):
     input_params = get_html_params(invoice_number)
     event.update(input_params)
 
@@ -73,13 +73,13 @@ def generate_invoice_html(event, invoice_number):
         "qty": "",
         "description": "<b>TOTAL</b>",
         "unitPrice": "",
-        "amount": "<b>$" + str(sum(int(x.get("amount").replace("$", "")) for x in event.get("lineItems"))) + "</b>"
+        "amount": "<b>$" + str(sum(float(x.get("amount").replace("$", "")) for x in event.get("lineItems"))) + "</b>"
     }
     line_item_html += Template(tmpl).substitute(total)
     event["lineItemsHtml"] = line_item_html
 
     #do the full html transformation
-    file = open('invoice_a360.html', 'r')
+    file = open("clients/%s/invoice.html" % client_key, 'r')
     return Template(file.read()).substitute(event)
 
 def get_invoice_count(key):
